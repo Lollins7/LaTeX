@@ -1,0 +1,21 @@
+\contentsline {chapter}{\numberline {第一章\hspace {.3em}}绪论}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}序}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}非参数统计概念及学习意义}{1}{subsection.1.1.1}%
+\contentsline {subsubsection}{1、意义}{1}{subsubsection*.2}%
+\contentsline {subsubsection}{2、概念}{1}{subsubsection*.3}%
+\contentsline {subsection}{\numberline {1.1.2}非参数统计的历史及发展}{1}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}引言}{2}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}参数统计方法与非参数统计方法的区别}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}非参数统计方法的特点}{2}{subsection.1.2.2}%
+\contentsline {chapter}{\numberline {第二章\hspace {.3em}}描述性统计}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}图表法}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}数值方法}{3}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}表示中心位置的数值}{3}{subsection.2.2.1}%
+\contentsline {subsubsection}{1、平均数}{4}{subsubsection*.4}%
+\contentsline {subsubsection}{2、中位数}{4}{subsubsection*.5}%
+\contentsline {subsubsection}{3、众数}{4}{subsubsection*.6}%
+\contentsline {subsubsection}{4、切尾平均数}{5}{subsubsection*.8}%
+\contentsline {subsection}{\numberline {2.2.2}表示离散程度的数值}{5}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}标准误}{5}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}偏度}{5}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}峰度}{6}{subsection.2.2.5}%
