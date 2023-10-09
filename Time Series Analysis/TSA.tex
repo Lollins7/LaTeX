@@ -4,6 +4,7 @@
 \usepackage{float, subfigure, enumerate, ulem, paralist}
 \usepackage{cite, listings, color}
 
+\usepackage[table]{xcolor}
 
 
 
@@ -208,13 +209,13 @@ Matlab，Eviews，R和SAS等。
         \text{严平稳} \nRightarrow  \text{宽平稳}            \\
         \text{严平稳} \nLeftarrow  \text{宽平稳}             \\
         \text{严平稳+二阶矩存在}  \Rightarrow  \text{宽平稳} \\
-        \text{在正态分布假设下，严平稳} \Leftrightarrow \text{宽平稳}
+        \text{在正态分布假设下，(严平稳} \Leftrightarrow \text{宽平稳})
     \end{array} \right.
 \end{equation*}
 
 \textbf{注：}以后见到的平稳时间序列，如果没有特别注明，都是\textbf{宽平稳时间序列}。如果序列不满足平稳条件，就称为\textbf{非平稳时间序列}。
 \begin{example}[白噪声序列(White Noise)]
-    一个简单的随机时间序列是一具有零均值同方差的独立分布序列：$X_t=\mu_t,\mu_t~N(0,\sigma^2)$.
+    一个简单的随机时间序列是一具有零均值同方差的独立分布序列：$X_t=\mu_t,\mu_t\sim N(0,\sigma^2)$.
 \end{example}
 \jie{解}{由于$X_t$具有相同的均值和方差，且协方差等于0，有定义可以得到\textbf{白噪声序列是平稳的}}
 
@@ -538,7 +539,7 @@ n为序列观察期数，m为指定延迟期数。
     \xi_t = \sum_{j = 0}^{\infty}\theta_j\varepsilon_{t-j}
 \end{equation}
 式中，$\theta_0 = 1,\sum_{j = 0}^{\infty}\theta_j^2<\infty$，$\{\epsilon_t\}$称为新息过程(innovation process)
-，是每个过程新加入的随机信息。$\varepsilon_t$为白噪声序列，序列值之间相互独立，不可预测，通常假定$\{\epsilon_t\}
+，是每个过程新加入的随机信息。$\varepsilon_t$为白噪声序列，序列值之间相互独立，不可预测，通常假定$\{\varepsilon_t\}
     \stackrel{i.i.d}{\sim}N(0,\sigma_{\varepsilon}^{2})$
 
 具有式\ref{eq3.2}结构的模型是1927年Yalu提出的自回归(autoregression)模型，简称AR模型。
@@ -556,7 +557,7 @@ n为序列观察期数，m为指定延迟期数。
 定义B为一个延迟算子，即$B^p = x_{t-p}$，则我们有
 \begin{itemize}
     \item 一阶差分：$\nabla x_t = (1-B)x_t$
-    \item 二阶差分：$\nabla^{p} x_t = (1-B)^{p}x_t$
+    \item p阶差分：$\nabla^{p} x_t = (1-B)^{p}x_t$
     \item k步差分：$\nabla_k x_t = (1-B^k)x_t$
 \end{itemize}
 
@@ -575,9 +576,10 @@ n为序列观察期数，m为指定延迟期数。
     具有如下结构的模型称为p阶自回归模型，简记为AR(p)：
     \begin{equation}\label{eq3.4}
         \begin{cases}
-            x_t=\phi_0+\phi_1x_{t-1}+\phi_2x_{t-2}+...+\phi_{\mu}x_{t-\rho}+\varepsilon_{t}                                     \\
-            \phi_p\neq0                                                                                                         \\
-            E(\varepsilon_{t})=0,\mathrm{Var}(\varepsilon_{t})=\sigma_{\varepsilon}^2,E(\varepsilon_t\varepsilon_{s})=0,s\neq t \\
+            x_t=\phi_0+\phi_1x_{t-1}+\phi_2x_{t-2}+...+\phi_{p}x_{t-p}+\varepsilon_{t} \\
+            \phi_p\neq0                                                                \\
+            E(\varepsilon_{t})=0,\mathrm{Var}(\varepsilon_{t})=
+            \sigma_{\varepsilon}^2,E(\varepsilon_t\varepsilon_{s})=0,s\neq t           \\
             E(x_s\varepsilon_{t})=0,\forall s<t
         \end{cases}
     \end{equation}
@@ -586,7 +588,7 @@ AR(p)模型有三个限制条件：
 \begin{enumerate}[1、]
     \item $\phi_p \neq 0$。保证模型的最高阶数为p。
     \item $E(\varepsilon_{t})=0,\mathrm{~Var}(\varepsilon_{t})=\sigma_{\varepsilon}^2,
-              E(\varepsilon_t\varepsilon_{s})=0,s\neq t$。保证随机干扰项$\{\varepsilon\}$为零均值白噪声序列。
+              E(\varepsilon_t\varepsilon_{s})=0,s\neq t$。保证随机干扰项$\{\varepsilon_t\}$为零均值白噪声序列。
     \item $E(x_s\varepsilon_{t})=0,\forall s < t$。保证当期的随机干扰项与过去的序列值无关。
 \end{enumerate}
 
@@ -646,7 +648,7 @@ AR(2)模型的平稳域为$\{\phi_1,\phi_2|~|\phi_2|<1,\phi_2\pm \phi_1<1\}$
 根据平稳时间序列的常数均值性质，有$Ex_t = \mu~(\forall~t\in T)$，上式等价于
 \begin{equation*}
     \begin{aligned}
-                    & (1-\phi_1-\cdots-\phi_p)_{\mu}=\phi_0     \\
+                    & (1-\phi_1-\cdots-\phi_p)\mu=\phi_0        \\
         \Rightarrow & \mu=\frac{\phi_0}{1-\phi_1-\cdots-\phi_p}
     \end{aligned}
 \end{equation*}
@@ -657,7 +659,7 @@ AR(2)模型的平稳域为$\{\phi_1,\phi_2|~|\phi_2|<1,\phi_2\pm \phi_1<1\}$
 \begin{definition}[Green函数]
     假设$\{x_t\}$为任意阶数的平稳AR模型，那么一定存在一个常数序列$\{G_j\}(j=0,1,2...)$，使得
     $\{x_t\}$可以等价为纯随机序列$\{\varepsilon_t\}$的线性组合，即
-    \begin{equation}
+    \begin{equation}\label{eq3.9}
         \begin{aligned}
             {x}_{t}
              & =\phi_1x_{t-1}+\phi_2x_{t-2}+\cdots+\phi_px_{t-p}+\varepsilon_t                                          \\
@@ -673,7 +675,7 @@ AR(2)模型的平稳域为$\{\phi_1,\phi_2|~|\phi_2|<1,\phi_2\pm \phi_1<1\}$
 \end{equation}
 
 其中$G_j$满足(递推可求出)
-\begin{equation}
+\begin{equation}\label{eq3.11}
     \left.\left\{\begin{aligned}
         G_0 & =1                                                \\
         G_j & =\sum_{k=1}^j\phi_k^{\prime}G_{j-k},~j=1,2,\cdots
@@ -682,6 +684,26 @@ AR(2)模型的平稳域为$\{\phi_1,\phi_2|~|\phi_2|<1,\phi_2\pm \phi_1<1\}$
     \begin{cases}\phi_k,k\leq p \\
         0,k>p &\end{cases}
 \end{equation}
+
+\begin{example}\label{ex3.2.3}
+    求平稳AR(1)模型$x_t=\varPhi_1x_{t-1}+\varepsilon_t$，$\varepsilon_t\sim
+        N(0,\sigma_{\varepsilon}^2)$的方差。
+\end{example}
+\jie{解}{
+    根据式\ref{eq3.11}，我们可以得到
+    \begin{equation*}
+        G_j=\begin{cases}
+            1        & ,j=0          \\
+            \phi_1^j & ,j=1,2,\cdots
+        \end{cases}
+    \end{equation*}
+    再根据式\ref{eq3.9}，得AR(1)模型的方差为
+    \begin{equation*}
+        Var(x_{t})=\sum_{j=0}^{\infty}G_{j}^{2}Var(\varepsilon_{t})
+        =\sum_{j=0}^{\infty}\phi_{1}^{2j}\sigma_{\varepsilon}^{2}
+        =\frac{\sigma_{\varepsilon}^{2}}{1-\phi_{1}^{2}}
+    \end{equation*}
+}
 
 \subsubsection{3、协方差函数}
 把方程\ref{eq3.4}中式1乘$x_{t-k}$，再求期望，得
@@ -692,6 +714,36 @@ AR(2)模型的平稳域为$\{\phi_1,\phi_2|~|\phi_2|<1,\phi_2\pm \phi_1<1\}$
 \begin{equation}
     \gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2}+\cdots+\phi_p\gamma_{k-p}\quad,\forall k\geq1
 \end{equation}
+
+\begin{example}
+    求平稳AR(1)模型的协方差。
+\end{example}
+\jie{解}{
+    由递推公式，我们得
+    \begin{equation*}
+        \gamma_k=\phi_1\gamma_{k-1}=\phi_1^k\gamma_{0}
+    \end{equation*}
+    在根据例\ref{ex3.2.3}的结果，带入上式，得
+    \begin{equation*}
+        \gamma_k=\phi_{1}^k\frac{\sigma_{\varepsilon}^{2}}{1-\phi_{1}^{2}},
+        \forall k\geq1
+    \end{equation*}
+}
+
+\begin{example}
+    求平稳AR(2)模型的协方差。
+\end{example}
+\jie{解}{
+    平稳AR(2)模型的协方差函数递推公式为
+    \begin{equation*}
+        \begin{cases}
+            \gamma_0=\dfrac{1-\phi_2}{(1+\phi_2)(1-\phi_1-\phi_2)(1+\phi_1-\phi_2)}\sigma_\varepsilon^2 \\
+            \gamma_1=\dfrac{\phi_1\gamma_0}{1-\phi_2}                                                   \\
+            \gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2},k\geq2
+        \end{cases}
+    \end{equation*}
+}
+
 
 \subsubsection{4、自相关系数}
 根据自相关系数的定义$\rho_k=\frac{\gamma_k}{\gamma_0}$，我们可以得到
@@ -710,7 +762,27 @@ AR模型的自相关系数的表达式实际上是一个齐次差分方程,它�
               \sum_{i=1}^pc_i\lambda_i^k\text{不会恒等于零,}\forall k>\text{某个常数}$
 \end{itemize}
 
+\begin{example}
+    AR(1)和AR(2)模型的自相关系数递推公式。
+\end{example}
+\jie{解}{
+    AR(1)模型
+    \begin{equation*}
+        \rho_k=\phi_1^k,k\geq0
+    \end{equation*}
+    AR(2)模型
+    \begin{equation*}
+        \rho_k=\begin{cases}
+            1,                                & k=0    \\
+            \frac{\phi_1}{1-\phi_2}           & k=1    \\
+            \phi_1\rho_{k-1}+\phi_2\rho_{k-2} & k\geq2
+        \end{cases}
+    \end{equation*}
+}
+
 \subsubsection{5、偏自相关系数}
+\textbf{偏自相关系数的定义}
+
 \begin{definition}[偏自相关系数]
     对于平稳AR(p)模型，滞后k期的偏自相关系数就是指定中间的k-1个随机变量$x_{t-1},x_{t-2},...,x_{t-k+1}$的条件下，
     $x_t$对$x_{t-k}$的相关度量，用数学语言描述为
@@ -720,6 +792,8 @@ AR模型的自相关系数的表达式实际上是一个齐次差分方程,它�
         {E[(x_{t-k}-\hat{E}x_{t-k})^2]}
     \end{equation}
 \end{definition}
+
+\textbf{偏自相关系数的计算}
 
 对于方程$x_{t}=\phi_{k1}x_{t-1}+\phi_{k2}x_{t-2}+\cdots\phi_{k(k-1)}x_{t-k+1}+\phi_{kk}x_{t-k}$等号两边
 同时乘$x_{t-l}$，再取期望，除以方差，得
@@ -745,8 +819,10 @@ AR模型的自相关系数的表达式实际上是一个齐次差分方程,它�
         \rho_{k-1} & \rho_{k-2} & \cdots & 1
     \end{matrix}\right.\right)
     \left(\begin{matrix}
-        \phi_1 \\\phi_2\\
-        \vdots \\\phi_p
+        \phi_{k1} \\
+        \phi_{k2} \\
+        \vdots    \\
+        \phi_{kk}
     \end{matrix}\right)
     =\left(\begin{matrix}
         \rho_1 \\\rho_2\\\vdots\\\rho_k
@@ -771,12 +847,225 @@ AR模型的自相关系数的表达式实际上是一个齐次差分方程,它�
     \end{vmatrix}
 \end{equation*}
 
+\textbf{偏自相关系数的截尾性}
 
-
+\begin{theorem}
+    平稳AR(p)模型的偏自相关系数具有p阶结尾性。
+    即$\varPhi_{kk} = 0(\forall ~ k > p)$。
+\end{theorem}
 
 \section{MA模型}
+\subsection{MA模型的定义}
+\begin{definition}
+    具有如下结构的模型称为q阶移动平均(moving average)模型，简记为MA(q)：
+    \begin{equation}\label{eq3.18}
+        \begin{cases}
+            x_t=\mu+\varepsilon_t-\theta_1\varepsilon_{t-1}-\theta_2\varepsilon_{t-2}-\cdots-\theta_q\varepsilon_{t-q} \\
+            \theta_q\neq0                                                                                              \\
+            E(\varepsilon_t)=0,Var(\varepsilon_t)=\sigma_\varepsilon^2,E(\varepsilon_t\varepsilon_s)=0,s\neq t
+        \end{cases}
+    \end{equation}
+\end{definition}
+使用MA(q)模型需要满足两个限制条件：
+\begin{enumerate}[1、]
+    \item $\theta_q \neq 0$，这个限制条件保证了模型的最高阶数为q。
+    \item $E(\varepsilon_t)=0,Var(\varepsilon_t)=\sigma_\varepsilon^2,E(\varepsilon_t\varepsilon_s)=0(s\neq t)$。
+          这个条件保证了随机干扰序列$\{\varepsilon_t\}$为零均值白噪声序列。
+\end{enumerate}
+
+当$\mu = 0$把模型\ref{eq3.18}称为中心化MA(q)模型。引入延迟算子，中心化MA(p)模型可以简记为
+\begin{equation}
+    x_t=\Theta(B)\varepsilon_t
+\end{equation}
+其中$\Theta(B)$称为q阶移动平均系数多项式
+\begin{equation*}
+    \Theta(B)=1-\theta_1B-\theta_2B^2-\cdots-\theta_qB^q
+\end{equation*}
+
+\subsection{MA模型的统计性质}
+\subsubsection{1、常数均值}
+\begin{equation}
+    \begin{aligned}
+          & E{x}_{t}                                                                                                  \\
+        = & E(\mu+\varepsilon_t-\theta_1\varepsilon_{t-1}-\theta_2\varepsilon_{t-2}-\cdots-\theta_q\varepsilon_{t-q}) \\
+        = & \mu
+    \end{aligned}
+\end{equation}
+
+\subsubsection{2、常数方差}
+\begin{equation}
+    \begin{aligned}
+        Var(x_{t}) & =Var(\mu+\varepsilon_t-\theta_1\varepsilon_{t-1}-\theta_2\varepsilon_{t-2}-\cdots-\theta_q\varepsilon_{t-q}) \\
+                   & =(1+\theta_1^2+\cdots+\theta_q^2)\sigma_\varepsilon^2
+    \end{aligned}
+\end{equation}
+
+\subsubsection{3、自协方差函数与自相关系数q阶截尾}
+\begin{equation}
+    \gamma_k=
+    \begin{cases}
+        (1+\theta_1^2+\cdots+\theta_q^2)\sigma_\varepsilon^2,                 & k=0            \\
+        (-\theta_k+\sum_{i=1}^{q-k}\theta_i\theta_{k+i})\sigma_\varepsilon^2, & 1\leq  k\leq q \\
+        0,                                                                    & k>q
+    \end{cases}
+\end{equation}
+\begin{equation}
+    \rho_k=\begin{cases}
+        1,                                                                                     & k=0            \\
+        \frac{-\theta_k+\sum_{i=1}^{q-k}\theta_i\theta_{k+i}}{1+\theta_1^2+\cdots+\theta_q^2}, & 1\leq  k\leq q \\
+        0,                                                                                     & k>q
+    \end{cases}
+\end{equation}
+
+\subsection{MA(q)模型的可逆性}
+对于模型1：$x_t=\varepsilon_t-\theta\varepsilon_{t-1}$与模型2：$x_t=\varepsilon_t-\frac{1}{\theta}\varepsilon_{t-1}$，
+我们发现其有相同的自相关系数。即对于不同的MA(q)模型，其自相关系数可能相同。
+
+这种自相关系数的不唯一性，会给我们将来的工作增加麻烦。因为，
+将来我们都是通过样本自相关系数显示出来的特征选择合适的模型拟合序列的发展，
+如果自相关系数和模型之间不是一一对应关系，
+就将导致拟合模型和随机序列之间不会是一一对应关系。
+
+为了保证一个给定的自相关函数能够对应唯一的模型，我们就要给模型增加约束条件。
+这个约束条件称为模型的\textbf{可逆性条件}。
+
+\begin{definition}[可逆MA模型]
+    若一个MA模型能够表示成为收敛的AR模型形式，那么该MA模型称为可逆MA模型。
+    即一个自相关系数列唯一对应一个可逆MA模型。
+\end{definition}
+
+\subsubsection{MA(q)模型的可逆性条件}
+MA(q)模型的可逆概念和AR(p)模型的平稳概念是对偶概念。下面给出低阶
+MA模型系数的可逆域。
+
+\textbf{1、MA(1)模型的可逆域}
+\begin{equation*}
+    \{\theta|-1<\theta<1\}
+\end{equation*}
+
+\textbf{2、MA(2)模型的可逆域}
+\begin{equation*}
+    \{\theta_1,\theta_2||\theta_2|<1\text{,且}
+    \theta_2\pm\theta_1<1\}
+\end{equation*}
+
+\subsubsection{逆函数的递推公式}
+原理(把MA(q)模型写成如下的两种等价形式)：
+\begin{equation*}
+    \begin{cases}x_t=\Theta(B)\varepsilon_t \\
+        \varepsilon_t=I(B)x_t
+    \end{cases}
+    \Rightarrow\Theta(B)I(B)x_t=x_t
+\end{equation*}
+其中$I(B)$为$1+\sum_{k=1}^{\infty}I_jB^j$，其中使用待定系数法，求解出递推公式为
+\begin{equation}\label{eq3.24}
+    \begin{cases}
+        I_0=1 \\
+        I_j=\sum_{k=1}^j\theta_k'I_{j-k},j=1,2,\cdots
+    \end{cases}
+    ,\text{其中}\theta_k'=
+    \begin{cases}
+        \theta_k,k\le q \\
+        0,k>q
+    \end{cases}
+\end{equation}
+
+\subsection{MA模型偏自相关系数拖尾}
+一个可逆的MA(q)模型可以等价的写成$AR(\infty)$模型形式(如式\ref{eq3.24})。
+
+AR(p)模型偏自相关系数p阶截尾，所以可逆的MA(q)模型偏自相关系数$\infty$
+阶截尾，即具有偏自相关系数拖尾性。
 
 \section{ARMA模型}
+\subsection{ARMA模型的定义}
+\begin{definition}
+    具有如下结构的模型称为自回归移动平均模型，简记为$ARMA(p,q)$
+    \begin{equation}
+        \begin{cases}
+            x_t=\phi_0+\phi_1x_{t-1}+\cdots+\phi_px_{t-p}+\varepsilon_t-\theta_1\varepsilon_{t-1}-\cdots-\theta_q\varepsilon_{t-q} \\
+            \phi_p\neq0,\theta_q\neq0                                                                                              \\
+            E(\varepsilon_t)=0,Var(\varepsilon_t)=\sigma_\varepsilon^2,E(\varepsilon_t\varepsilon_s)=0,s\neq t                     \\
+            E(x_s\varepsilon_t)=0,\forall s<t
+        \end{cases}
+    \end{equation}
+\end{definition}
+特别当$\varphi_0 = 0$，称为中心化$ARMA(p,q)$模型。
+
+引进延迟算子，$ARMA(p,q)$模型可以简记为
+\begin{equation}
+    \Phi(B)x_t=\Theta(B)\varepsilon_t
+\end{equation}
+其中$\begin{aligned}\Phi(B)=&1-\phi_1B-\phi_2B^2-\cdots-\phi_pB^p\end{aligned}$，
+$\Theta(B)=1-\theta_1B-\theta_2B^2-\cdots-\theta_qB^q$
+
+\subsection{平稳条件与可逆条件}
+\subsubsection{ARMA(p,q)模型的平稳条件}
+p阶自回归系数多项式$\Phi(u)=0$的根都在单位圆外，其中$u = \frac1\lambda$。
+即$ARMA(p,q)$模型的平稳性完全由其自回归部分的平稳性决定。
+
+\subsubsection{ARMA(p,q)模型的可逆条件}
+q阶自回归系数多项式$\Theta(u)=0$的根都在单位圆外，其中$u = \frac1\lambda$。
+即$ARMA(p,q)$模型的可逆性完全由其移动平滑部分的可逆性决定。
+
+\subsection{传递形式与逆转形式}
+\subsubsection{传递形式}
+\begin{equation}
+    x_t=\Phi^{-1}(B)\Theta(B)\varepsilon_t=\sum_{j=0}^\infty G_j\varepsilon_{t-j}
+\end{equation}
+其中，
+\begin{equation*}
+    \begin{cases}
+        G_0=1                                                    & ,k=0      \\
+        G_k=\sum_{j=1}^k\phi_j^{\prime}G_{k-j}-\theta_k^{\prime} & ,  k\geq1
+    \end{cases}
+    \phi_j'=\begin{cases}
+        \phi_j & ,1\leq j\leq q \\
+        0      & ,j>q
+    \end{cases}
+\end{equation*}
+
+\subsubsection{逆转形式}
+\begin{equation}
+    \varepsilon_t=\Theta^{-1}(B)\Phi(B)x_t=\sum_{j=0}^\infty I_jx_{t-j}
+\end{equation}
+其中，
+\begin{equation*}
+    \begin{cases}
+        I_0=1                                                    & ,k=0      \\
+        I_k=\sum_{j=1}^k\theta_j^{\prime}I_{k-j}-\phi_k^{\prime} & ,  k\geq1
+    \end{cases}
+    \theta_j'=\begin{cases}
+        \theta_j & ,1\leq j\leq q \\
+        0        & ,j>q
+    \end{cases}
+\end{equation*}
+
+\subsection{ARMA(p,q)模型的统计性质}
+\subsubsection{均值}
+\begin{equation}
+    I_k=\sum_{j=1}^k\theta_j^{\prime}I_{k-j}-\phi_k^{\prime}
+\end{equation}
+
+\subsubsection{协方差}
+\begin{equation}
+    \gamma(k)=\sigma_\varepsilon^2\sum_{i=0}^\infty G_iG_{i+k}
+\end{equation}
+
+\subsubsection{自相关系数}
+\begin{equation}
+    \rho(k)=\frac{\gamma(k)}{\gamma(0)}=\frac{\sum_{j=0}^\infty G_jG_{j+k}}{\sum_{j=0}^\infty G_j^2}
+\end{equation}
+
+\subsection{ARMA模型的相关性}
+自相关系数拖尾性：ARMA(p,q)模型可以转化为无穷阶移动平均模型。
+
+偏自相关系数拖尾性：ARMA(p,q)模型可以转化为无穷阶自回归模型。
+
+
+
+
+
+
 
 
 \begin{thebibliography}{4}
