@@ -91,9 +91,9 @@ $2023/9/19$，过去一个月了，最近在网上看到了Elegant\TeX 的模板
 \par 对二元函数$f(x,y)$，我们对其使用Laplace Operator，得到
 \begin{equation*}
 	\begin{aligned}
-		\Delta f & =\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   \\
-		         & \begin{aligned}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    & \approx\frac{f\left(x+\Delta x,y\right)+f\left(x-\Delta x,y\right)-2f\left(x,y\right)}{\left(\Delta x\right)^2}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  \\&+\frac{f\left(x,y+\Delta y\right)+f\left(x,y-\Delta y\right)-2f\left(x,y\right)}{\left(\Delta y\right)^2}\end{aligned}
+		\Delta f & =\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  \\
+		         & \begin{aligned}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   & \approx\frac{f\left(x+\Delta x,y\right)+f\left(x-\Delta x,y\right)-2f\left(x,y\right)}{\left(\Delta x\right)^2}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 \\&+\frac{f\left(x,y+\Delta y\right)+f\left(x,y-\Delta y\right)-2f\left(x,y\right)}{\left(\Delta y\right)^2}\end{aligned}
 	\end{aligned}
 \end{equation*}
 \par 把此二元函数离散化，为了简化，假设$x$和$y$的增量即步长为$1$，即
@@ -427,6 +427,13 @@ $1$，即所有分量为$1$，即$L\bv{1}_n = 0\bv{1}_n = \bv{0}_n$；
 	\end{enumerate}
 \end{theorem}
 
+\begin{theorem}
+	A为Hurwitz Matrix的充分必要条件为，对于$\forall$正定矩阵$Q$，存在满足方程
+	\begin{equation*}
+		PA^T+A^TP=-Q
+	\end{equation*}
+	的正定矩阵P，且P是方程的唯一解。
+\end{theorem}
 
 \chapter{Convex Optimization}
 \section{Convex Function}
@@ -659,7 +666,7 @@ $1$，即所有分量为$1$，即$L\bv{1}_n = 0\bv{1}_n = \bv{0}_n$；
 下面介绍一些相关的等价定理。
 
 \begin{theorem}
-	\label{th2.1.12}
+	\label{th2.2}
 	以下几个性质是等价的：
 	\begin{enumerate}[1、]
 		\item f是强凸的，且凸性度量为m；
@@ -668,11 +675,12 @@ $1$，即所有分量为$1$，即$L\bv{1}_n = 0\bv{1}_n = \bv{0}_n$；
 		\item $f(\bv{y})\geq f(\bv{x})+\nabla f(\bv{x})^T(\bv{y-x})+\frac m2\|\bv{y-x}\|^2$
 	\end{enumerate}
 \end{theorem}
+\textbf{注：}如果f是强凹函数，那么-f为强凸函数。
 
 定理之间的互推略过，可以参考本文的最后。
 
 \begin{theorem}
-	\label{th2.1.13}
+	\label{th2.3}
 	以下几个性质是等价的：
 	\begin{enumerate}[1、]
 		\item $\nabla f(x)$是Lipschitz连续的，且光滑性度量为L；
@@ -682,7 +690,7 @@ $1$，即所有分量为$1$，即$L\bv{1}_n = 0\bv{1}_n = \bv{0}_n$；
 	\end{enumerate}
 \end{theorem}
 
-强凸和强光滑性是非常好的函数性质，而且就定理\ref{th2.1.12}和\ref{th2.1.13}就可以看出，它们利用了二阶信息，\textbf{对函数分别提供了一个上界和一个下界}。
+强凸和强光滑性是非常好的函数性质，而且就定理\ref{th2.2}和\ref{th2.3}就可以看出，它们利用了二阶信息，\textbf{对函数分别提供了一个上界和一个下界}。
 
 本节主要参考了\href{https://zhuanlan.zhihu.com/p/210252556}{凸优化|笔记整理（2）——凸函数，强凸函数及相关拓展}
 
@@ -752,7 +760,7 @@ $\bv{x_e}$在李雅普诺夫意义下是\textbf{大范围内渐进稳定的}（A
 	其中$\lambda$为指数收敛率，k为超调量。
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{th3.2}
 	假设$\bv{x} = 0$为非线性系统$\dot{\bv{x}}=f(\bv{x})$的平衡点，且$f(\bv{x})$在$\bv{x} = 0$的邻域是连续可微的。令
 	\begin{equation}
 		A=\left.\frac{\partial f}{\partial \bv{x}}\right|_{\bv{x}=0}
@@ -760,7 +768,7 @@ $\bv{x_e}$在李雅普诺夫意义下是\textbf{大范围内渐进稳定的}（A
 	当且仅当A是Hurwitz Matrix(见定义\ref{de1.5})时，$\bv{x}=0$为非线性系统的Exponentially Stable平衡点。
 \end{theorem}
 
-\begin{theorem}[Exponential stability theorem]
+\begin{theorem}[Exponential stability theorem]\label{th3.3}
 	假设$\bv{x} = 0$为非线性系统$\dot{\bv{x}}=f(\bv{x},t)$的Exponentially Stable平衡点，$\forall t \geq t_0$，$\forall \bv{x}(t_0) \in D$，
 	存在函数V满足以下不等式：
 	\begin{equation}
@@ -824,8 +832,24 @@ $\bv{x_e}$在李雅普诺夫意义下是\textbf{大范围内渐进稳定的}（A
 	即证式\ref{eq3.6}。
 
 	证毕！
-
 \end{proof}
+
+\section{Comparison Lemma}
+\begin{lemma}[Comparison Lemma]
+	考虑一个标量微分方程
+	\begin{equation}
+		\dot{u}=f(t,u),\quad u(t_0)=u_0
+	\end{equation}
+	对于所有$t\geq 0$和所有$u\in J \subset R$，$f(t,u)$对于t连续可微，且对于u是局部Lipschitz的。设$[t_0,T)(\text{T可以是无限的})$
+	是解$u(t)$存在的最大区间，并且假设对于所有$t\in [t_0,T)$，有$u(t)\in J$。设$v(t)$是连续函数，其上右导数$D^+v(t)$对于所有
+	$t\in [t_0,T)$，$v(t)\in J$满足微分不等式
+	\begin{equation}
+		D^+v(t)\leqslant f(t,v(t)),\quad v(t_0)\leqslant u_0
+	\end{equation}
+	那么，对于所有$t\in [t_0,T)$，有$v(t)\leq u(t)$。
+\end{lemma}
+
+
 
 \chapter{Calculus}
 \section{矩阵与范数求导}
@@ -872,7 +896,7 @@ $\bv{x_e}$在李雅普诺夫意义下是\textbf{大范围内渐进稳定的}（A
 \chapter{Advanced Algebra}
 \section{Gerschgorin Circle Theorem—特征值估计\label{Gerschgorin}}
 \begin{theorem}[圆盘第一定理]\label{Gerschgorin1}
-	设A是n阶复矩阵，$A=(a_{ij})_{n \times n}$，则A的特征值在复平面上的下列圆盘（又称戈式圆盘）中：
+	设A是n阶复矩阵，$A=(a_{ij})_{n \times n}$，则A的特征值z在复平面上的下列圆盘（又称戈式圆盘）中：
 	\begin{equation*}
 		|z-a_{ii}|\leq R_i,i=1,2,\ldots,n
 	\end{equation*}
@@ -1013,7 +1037,9 @@ $\bv{x_e}$在李雅普诺夫意义下是\textbf{大范围内渐进稳定的}（A
 	特征值都小于等于0，故其为Hurwitz Matrix。
 \end{proof}
 
-
+\section{式(11)的强凹函数不等式}
+如果f是强凹函数，那么-f就是一个强凸函数，再根据定理\ref{th2.2}
+中的第2个性质，即毕!
 
 
 
@@ -1046,7 +1072,11 @@ $\bv{x_e}$在李雅普诺夫意义下是\textbf{大范围内渐进稳定的}（A
 \end{equation*}
 所以$\lambda_i < 0$，$i = 1, 2,\ldots,N$，证毕！
 
+\section{式(20)中的$x^*$指数稳定}
+根据定理\ref{th3.2}即得。
 
+\section{式(21)}
+根据定理\ref{th3.3}可得，其中，因为论文是时不变系统，所以第二个公式没有对t求导。
 
 
 \end{document}
